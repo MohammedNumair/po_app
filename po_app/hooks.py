@@ -242,3 +242,8 @@ app_license = "mit"
 # 	"Logging DocType Name": 30  # days to retain logs
 # }
 
+doc_events = {
+    "Purchase Order": {
+        "before_print": "po_app.overrides.purchase_order.validate_po_reprint"
+    }
+}
