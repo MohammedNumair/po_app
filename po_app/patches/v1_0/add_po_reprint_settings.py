@@ -8,15 +8,13 @@ def execute():
     3. Hidden Int field on Purchase Order: print_count
     """
 
-    # 1) Create child DocType "PO Reprint User" (table)
     if not frappe.db.exists("DocType", "PO Reprint User"):
         dt = frappe.new_doc("DocType")
         dt.name = "PO Reprint User"
-        dt.module = "Buying"       # keep it under Buying module
-        # dt.custom = 1              # mark as custom
-        dt.istable = 1             # marks this as child table
+        dt.module = "Buying"
+        # dt.custom = 1
+        dt.istable = 1
 
-        # add child field properly
         dt.append("fields", {
             "fieldname": "user",
             "label": "User",
@@ -35,7 +33,6 @@ def execute():
         dt.insert(ignore_if_duplicate=True)
         frappe.db.commit()
 
-    # 2) Add Table field on Buying Settings
     if not frappe.db.exists("Custom Field", {"dt": "Buying Settings", "fieldname": "po_reprint_users"}):
         cf = frappe.get_doc({
             "doctype": "Custom Field",
@@ -44,12 +41,10 @@ def execute():
             "label": "PO Reprint Authorized Users",
             "fieldtype": "Table",
             "options": "PO Reprint User",
-            "insert_after": "default_print_format"  # adjust if needed
+            "insert_after": "default_print_format"
         })
         cf.insert()
         frappe.db.commit()
-
-    # 3) Add Int field on Purchase Order
     if not frappe.db.exists("Custom Field", {"dt": "Purchase Order", "fieldname": "print_count"}):
         cf2 = frappe.get_doc({
             "doctype": "Custom Field",
