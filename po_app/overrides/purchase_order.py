@@ -10,7 +10,6 @@ def validate_po_reprint(doc, print_format=None, style=None, meta=None):
     - Subsequent prints are restricted to allowed reprint users
     """
     is_preview = not frappe.form_dict.get("format")
-    
     if is_preview:
         return
     
