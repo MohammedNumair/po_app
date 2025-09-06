@@ -1,6 +1,6 @@
 ### PO App
 
-This is for PO
+This is for PO Print permission access for allowing to print second time
 
 ### Installation
 
